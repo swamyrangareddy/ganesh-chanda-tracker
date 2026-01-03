@@ -11,6 +11,8 @@ import Dashboard from '@/pages/Dashboard';
 import Expenses from '@/pages/Expenses';
 import Chandas from '@/pages/Chandas';
 import Images from '@/pages/Images';
+import Games from '@/pages/Games';
+import GameDetail from '@/pages/GameDetail';
 import OrganizationSettings from '@/pages/OrganizationSettings';
 
 import { Loader2 } from 'lucide-react';
@@ -67,6 +69,8 @@ export default function OrganizationHome() {
             <Route path="/expenses" element={<Expenses />} />
             <Route path="/chandas" element={<Chandas />} />
             <Route path="/images" element={<Images />} />
+            <Route path="/games" element={<Games />} />
+            <Route path="/games/:gameId" element={<GameDetail />} />
             <Route path="/settings" element={<OrganizationSettings />} />
             
           </Routes>

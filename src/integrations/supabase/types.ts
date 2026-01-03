@@ -180,6 +180,158 @@ export type Database = {
           },
         ]
       }
+      game_entries: {
+        Row: {
+          created_at: string
+          game_id: string
+          id: string
+          participant_details: string | null
+          participant_mobile: string | null
+          participant_name: string
+          photo_path: string
+          photo_url: string
+          updated_at: string
+          vote_count: number
+        }
+        Insert: {
+          created_at?: string
+          game_id: string
+          id?: string
+          participant_details?: string | null
+          participant_mobile?: string | null
+          participant_name: string
+          photo_path: string
+          photo_url: string
+          updated_at?: string
+          vote_count?: number
+        }
+        Update: {
+          created_at?: string
+          game_id?: string
+          id?: string
+          participant_details?: string | null
+          participant_mobile?: string | null
+          participant_name?: string
+          photo_path?: string
+          photo_url?: string
+          updated_at?: string
+          vote_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_entries_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      game_votes: {
+        Row: {
+          created_at: string
+          entry_id: string
+          game_id: string
+          id: string
+          mobile_number: string
+        }
+        Insert: {
+          created_at?: string
+          entry_id: string
+          game_id: string
+          id?: string
+          mobile_number: string
+        }
+        Update: {
+          created_at?: string
+          entry_id?: string
+          game_id?: string
+          id?: string
+          mobile_number?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_votes_entry_id_fkey"
+            columns: ["entry_id"]
+            isOneToOne: false
+            referencedRelation: "game_entries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "game_votes_game_id_fkey"
+            columns: ["game_id"]
+            isOneToOne: false
+            referencedRelation: "games"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      games: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          details_revealed: boolean
+          festival_id: string | null
+          id: string
+          max_votes_per_mobile: number
+          name: string
+          organization_id: string | null
+          photo_instructions: string | null
+          status: string
+          updated_at: string
+          voting_end: string | null
+          voting_start: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          details_revealed?: boolean
+          festival_id?: string | null
+          id?: string
+          max_votes_per_mobile?: number
+          name: string
+          organization_id?: string | null
+          photo_instructions?: string | null
+          status?: string
+          updated_at?: string
+          voting_end?: string | null
+          voting_start?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          details_revealed?: boolean
+          festival_id?: string | null
+          id?: string
+          max_votes_per_mobile?: number
+          name?: string
+          organization_id?: string | null
+          photo_instructions?: string | null
+          status?: string
+          updated_at?: string
+          voting_end?: string | null
+          voting_start?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "games_festival_id_fkey"
+            columns: ["festival_id"]
+            isOneToOne: false
+            referencedRelation: "festivals"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "games_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       images: {
         Row: {
           created_at: string
@@ -377,6 +529,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      get_remaining_votes: {
+        Args: { p_game_id: string; p_mobile: string }
+        Returns: number
+      }
       get_total_amount: { Args: never; Returns: number }
       get_total_by_category: {
         Args: { category_param: string }
