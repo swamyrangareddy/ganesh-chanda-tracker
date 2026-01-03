@@ -1,8 +1,8 @@
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Home, Receipt, Wallet, Image, Users } from 'lucide-react';
+import { Home, Receipt, Wallet, Image, Users, Gamepad2 } from 'lucide-react';
 
-export type PageOption = 'dashboard' | 'chandas' | 'expenses' | 'images' | 'organizers';
+export type PageOption = 'dashboard' | 'chandas' | 'expenses' | 'images' | 'organizers' | 'games';
 
 interface PageSelectorProps {
   value: PageOption[];
@@ -40,6 +40,12 @@ const pages: { id: PageOption; name: string; description: string; icon: React.El
     name: 'Organizers',
     description: 'Team members',
     icon: Users
+  },
+  {
+    id: 'games',
+    name: 'Games & Voting',
+    description: 'Photo competitions',
+    icon: Gamepad2
   }
 ];
 
